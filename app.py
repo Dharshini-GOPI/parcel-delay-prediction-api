@@ -26,7 +26,22 @@ def predict():
         "Courier Company": data["courier_company"],
         "Parcel Description": data["parcel_description"],
         "Department": data["department"],
-        "Year of Study": int(data["year_of_study"]),
+         year_text = str(data["year_of_study"]).strip().upper()
+         year_mapping = {
+             "FIRST YEAR": 1,
+             "SECOND YEAR": 2,
+             "THIRD YEAR": 3,
+             "FOURTH YEAR": 4,
+             "1": 1,
+             "2": 2,
+             "3": 3,
+             "4": 4
+         }
+
+         year_number = year_mapping.get(year_text)
+
+         if year_number is None:
+                    raise ValueError("Invalid Year of Study: " + year_text)
         "Arrival Month": arrival_date.month,
         "Arrival Day": arrival_date.day,
         "Arrival Weekday": arrival_date.dayofweek
